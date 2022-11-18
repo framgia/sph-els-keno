@@ -23,6 +23,4 @@ class Activity extends Model
     public function activityable() {   
         return $this->morphTo();
     }
-
-
 }
