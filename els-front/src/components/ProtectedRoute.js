@@ -2,7 +2,7 @@ import {
     Navigate,
   } from 'react-router-dom';
   
-const ProtectedRoute = ({ user, redirectPath = '/',for_auth = false,children }) => {
+const ProtectedRoute = ({ user, redirectPath = '/', for_auth = false, children }) => {
     if(for_auth && user) {
         return <Navigate to={redirectPath} replace />;
     }
