@@ -17,7 +17,7 @@ const Routes = () => {
         { 
             path: "/auth", 
             element: 
-                <ProtectedRoute user={true} for_auth redirectPath="/s"> 
+                <ProtectedRoute user={true} for_auth redirectPath="/"> 
                     <Auth /> 
                 </ProtectedRoute>
         },
