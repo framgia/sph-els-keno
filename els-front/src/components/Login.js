@@ -1,11 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Field } from 'react-final-form'
-
+import api from '../plugins/axios'
+import { errorNotify, successNotify } from "../plugins/toast";
 
 const Login = () => {
-    const onSubmit = async (formValues) => {
-        console.log(formValues)
+    const handleLogin = async ( formValues, type = 'user' ) => {
+        const response = await api.post(`${type}/login`, formValues)
+     
+        if(response.data.error) {
+            if(type === 'user')
+                handleLogin(formValues,'admin')
+            else 
+                errorNotify('Invalid credentails')
+        } else {
+            successNotify("Login successfully")
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('access_type', type)
+        }
+    
+    }
+
+    const onSubmit = (formValues) => {
+        handleLogin(formValues)
     } 
 
     return (

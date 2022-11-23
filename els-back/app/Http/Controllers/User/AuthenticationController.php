@@ -25,7 +25,7 @@ class AuthenticationController extends Controller
 
             return response()->json($success, 200);
         }else{ 
-            return response()->json(['message' => 'Username and Password are Wrong.'], 422);
+            return response()->json(['error' => ['Username and Password are Wrong.']], 200);
         }
     }
 

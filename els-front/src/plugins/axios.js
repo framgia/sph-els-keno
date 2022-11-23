@@ -22,7 +22,7 @@ httpClient.interceptors.response.use((response) => {
 
           break;
       case 500:
-          messages.push('Internal Server Error.')
+          messages.push('Internal Server Error. Please contact the developer to resolve this issue.')
           break;
       case 503:
           messages.push('Service unavailable, please check your internet connection to continue.')
@@ -39,7 +39,6 @@ httpClient.interceptors.response.use((response) => {
           messages.push('Opps, something went wrong in processing your request.')
           break;
   }
-      
   messages.forEach(message => errorNotify(message))
   console.log(messages)
 });
