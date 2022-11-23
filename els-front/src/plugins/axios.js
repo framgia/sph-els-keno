@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { errorNotify } from "./toast";
 
 const httpClient = axios.create({
@@ -16,6 +17,7 @@ httpClient.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   let messages = []
+  const navigate = useNavigate();
   switch (error.response.status) {
       case 404:
           // messages.push('nous n'avons pas trouvé cette page')
@@ -29,7 +31,7 @@ httpClient.interceptors.response.use((response) => {
           break;
       case 401:
           localStorage.setItem('token', '')
-          // history.push('/auth/login') Reminder to implement this
+          navigate('/auth/login')
           messages.push('You are not logged in. Please login first.')
           break;
       case 422:

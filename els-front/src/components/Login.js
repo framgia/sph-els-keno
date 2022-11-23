@@ -5,6 +5,7 @@ import api from '../plugins/axios'
 import { errorNotify, successNotify } from "../plugins/toast";
 
 const Login = () => {
+
     const handleLogin = async ( formValues, type = 'user' ) => {
         const response = await api.post(`${type}/login`, formValues)
      
@@ -17,6 +18,8 @@ const Login = () => {
             successNotify("Login successfully")
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('access_type', type)
+
+            window.location.reload();
         }
     
     }

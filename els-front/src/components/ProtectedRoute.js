@@ -6,7 +6,7 @@ const ProtectedRoute = ({ user, redirectPath = '/', for_auth = false, children }
     if(for_auth && user) {
         return <Navigate to={redirectPath} replace />;
     }
-    if (!user && for_auth == false) {
+    if (!user && for_auth === false) {
         return <Navigate to={redirectPath} replace />;
     }
 
