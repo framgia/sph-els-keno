@@ -47,7 +47,7 @@ const Login = () => {
             <div className="text-center text-4xl font-medium">Log In</div>
             <Form 
                 onSubmit={ onSubmit }
-                validate= {(formValues) => validateForm(formValues)}
+                validate= { validateForm }
                 render={({ handleSubmit, submitting }) => (
                     <form onSubmit={ handleSubmit } className="flex w-[30rem] flex-col space-y-10">
                         <Field name="email">
