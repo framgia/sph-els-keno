@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Form, Field } from 'react-final-form'
 import api from '../plugins/axios'
 import { errorNotify, successNotify } from "../plugins/toast";
+import { setUserToken, setUserType } from "../plugins/localStorageHelper";
 
 const Login = () => {
-
     const handleLogin = async ( formValues, type = 'user' ) => {
         const response = await api.post(`${type}/login`, formValues)
      
@@ -16,9 +16,9 @@ const Login = () => {
                 errorNotify('Invalid credentails')
         } else {
             successNotify("Login successfully")
-            localStorage.setItem('token', response.data.token)
-            localStorage.setItem('access_type', type)
-
+            setUserToken(response.data.token)
+            setUserType(type)
+            
             window.location.reload();
         }
     
@@ -28,24 +28,26 @@ const Login = () => {
         handleLogin(formValues)
     } 
 
+    const validateForm = (formValues) => {
+        const errors = {};
+
+        if(!formValues.email) 
+            errors.email = "Email is required"
+        else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.email))
+            errors.email = "Invalid email address"
+
+        if(!formValues.password)
+            errors.password = "Password is required"
+
+        return errors;
+    } 
+
     return (
         <div className="flex w-[30rem] flex-col space-y-10">
             <div className="text-center text-4xl font-medium">Log In</div>
             <Form 
                 onSubmit={ onSubmit }
-                validate= {(formValues) => {
-                    const errors = {};
-
-                    if(!formValues.email) 
-                        errors.email = "Email is required"
-                    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.email))
-                        errors.email = "Invalid email address"
-
-                    if(!formValues.password)
-                        errors.password = "Password is required"
-
-                    return errors;
-                }}
+                validate= {(formValues) => validateForm(formValues)}
                 render={({ handleSubmit, submitting }) => (
                     <form onSubmit={ handleSubmit } className="flex w-[30rem] flex-col space-y-10">
                         <Field name="email">
