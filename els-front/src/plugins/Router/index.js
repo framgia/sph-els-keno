@@ -16,7 +16,7 @@ const Routes = ({ user }) => {
         { 
             path: "/",
             element: 
-                <ProtectedRoute user={user} redirectPath="/auth/login"> 
+                <ProtectedRoute user={user} type="user" redirectPath="/auth/login" otherAuthenticatedRedirectPath="/admin/categories"> 
                     <Main />
                 </ProtectedRoute>,
             children : [
@@ -56,6 +56,10 @@ const Routes = ({ user }) => {
             children : [
                 {
                     path : "login",
+                    element : <Login />
+                },
+                {
+                    path : "admin/login",
                     element : <Login />
                 },
                 {
