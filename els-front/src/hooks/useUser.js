@@ -16,7 +16,7 @@ const useUser = () => {
       checkUser()
   },[]);
 
-  return [user];
+  return { user };
 }
 
 export default useUser;
