@@ -29,6 +29,25 @@ class AuthenticationController extends Controller
         }
     }
 
+    public function register(Request $request) 
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+        ]);
+
+        if(User::where('email',$request->email)->exists()) return response()->json(['error' => ['Credentials not valid.']], 422);
+
+        $user = User::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => bcrypt($request->password)
+        ]);
+
+        return $user;
+    }
+
     public function logout(Request $request)
     {
         auth()->guard('user')->logout();

@@ -9,6 +9,7 @@ import Dashboard from "../../components/Dashboard.js";
 import LearnedWords from "../../components/LearnedWords.js";
 import Login from "../../components/Login.js";
 import Register from "../../components/Register.js";
+import Categories from "../../components/admin/Categories";
 
 const Routes = ({ user }) => {
     let routes = useRoutes([
@@ -30,6 +31,19 @@ const Routes = ({ user }) => {
                 {
                     path : "learned-words",
                     element : <LearnedWords />
+                }
+            ]
+        },
+        {
+            path : "/admin/",
+            element : 
+                <ProtectedRoute user={user} type="admin" redirectPath="/auth/admin/login" otherAuthenticatedRedirectPath="/dashboard">
+                    <Main />
+                </ProtectedRoute>,
+            children : [
+                {
+                    path : "categories",
+                    element : <Categories />
                 }
             ]
         },

@@ -42,6 +42,19 @@ const Login = () => {
         return errors;
     } 
 
+    const renderRegistration = () => {
+        return loginType === "user" ? 
+        <p className="text-center text-lg">
+            No account?
+            <Link 
+                to="/auth/register"
+                className="font-medium pl-1 text-blue-500 underline-offset-4 hover:underline"
+            >
+                Create One
+            </Link>
+        </p> : null
+    }
+
     return (
         <div className="flex w-[30rem] flex-col space-y-10">
             <div className="text-center text-4xl font-medium">Log In</div>
@@ -89,15 +102,7 @@ const Login = () => {
                 )}
             >
             </Form>
-            <p className="text-center text-lg">
-                No account?
-                <Link 
-                    to="/auth/register"
-                    className="font-medium pl-1 text-blue-500 underline-offset-4 hover:underline"
-                >
-                    Create One
-                </Link>
-            </p>
+            {renderRegistration()}
         </div>
     )
 }
