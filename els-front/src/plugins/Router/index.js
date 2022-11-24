@@ -1,7 +1,6 @@
 import {
     useRoutes,
 } from "react-router-dom";
-import { useState } from "react";
 import Main from "../../components/Main.js";
 import Auth from "../../components/Auth";
 import ProtectedRoute from "../../components/ProtectedRoute.js";
@@ -11,9 +10,7 @@ import LearnedWords from "../../components/LearnedWords.js";
 import Login from "../../components/Login.js";
 import Register from "../../components/Register.js";
 
-const Routes = () => {
-    const [user, setUser] = useState(null);
-
+const Routes = ({ user }) => {
     let routes = useRoutes([
         { 
             path: "/",
