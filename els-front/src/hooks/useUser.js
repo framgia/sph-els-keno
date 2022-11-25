@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import api from '../plugins/axios'
-import { getUserType } from "../plugins/localStorageHelper";
+import { getUserToken, getUserType } from "../plugins/localStorageHelper";
 
 const useUser = () => {
     const [user, setUser] = useState(null);
 
   useEffect(() => {
-      const type = getUserType()
+        const type = getUserType()
+        const token = getUserToken()
 
-      const checkUser = async () => {
-          const response = await api.get(`${type}/details`)
-          setUser(response.data)
-      }
-
-      checkUser()
+        if(token && type) {
+            const checkUser = async () => {
+                const response = await api.get(`${type}/details`)
+                setUser(response.data)
+            }
+            
+            checkUser()
+        }
   },[]);
 
   return { user };

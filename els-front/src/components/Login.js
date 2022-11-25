@@ -1,23 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Form, Field } from 'react-final-form'
 import api from '../plugins/axios'
 import { errorNotify, successNotify } from "../plugins/toast";
 import { setUserToken, setUserType } from "../plugins/localStorageHelper";
+import { pathType } from "../plugins/Router/routeHelper";
 
 const Login = () => {
-    const handleLogin = async ( formValues, type = 'user' ) => {
-        const response = await api.post(`${type}/login`, formValues)
+    const loginType = pathType(useLocation())
+    const handleLogin = async ( formValues ) => {
+        const response = await api.post(`${loginType}/login`, formValues)
      
         if(response.data.error) {
-            if(type === 'user')
-                handleLogin(formValues,'admin')
-            else 
-                errorNotify('Invalid credentails')
+            errorNotify('Invalid credentails')
         } else {
             successNotify("Login successfully")
             setUserToken(response.data.token)
-            setUserType(type)
+            setUserType(loginType)
             
             window.location.reload();
         }
@@ -42,9 +41,22 @@ const Login = () => {
         return errors;
     } 
 
+    const renderRegistration = () => {
+        return loginType === "user" ? 
+        <p className="text-center text-lg">
+            No account?
+            <Link 
+                to="/auth/register"
+                className="font-medium pl-1 text-blue-500 underline-offset-4 hover:underline"
+            >
+                Create One
+            </Link>
+        </p> : null
+    }
+
     return (
         <div className="flex w-[30rem] flex-col space-y-10">
-            <div className="text-center text-4xl font-medium">Log In</div>
+            <div className="text-center text-4xl font-medium">Log In {loginType.toUpperCase()}</div>
             <Form 
                 onSubmit={ onSubmit }
                 validate= { validateForm }
@@ -89,15 +101,7 @@ const Login = () => {
                 )}
             >
             </Form>
-            <p className="text-center text-lg">
-                No account?
-                <Link 
-                    to="/auth/register"
-                    className="font-medium pl-1 text-blue-500 underline-offset-4 hover:underline"
-                >
-                    Create One
-                </Link>
-            </p>
+            {renderRegistration()}
         </div>
     )
 }
