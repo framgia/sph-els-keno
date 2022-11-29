@@ -15,6 +15,8 @@ class LearnedWord extends Model
         'result_id'
     ];
 
+    protected $appends = ['answer'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }
@@ -25,5 +27,9 @@ class LearnedWord extends Model
 
     public function result() {
         return $this->belongsTo(Result::class);
+    }
+
+    public function getAnswerAttribute() {
+        return $this->word->choices()->where('correct_answer',1)->first()->choice;
     }
 }

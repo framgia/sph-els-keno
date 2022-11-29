@@ -7,10 +7,8 @@ import { errorNotify, successNotify } from "../plugins/toast";
 const TopNav = () => {
     const type = getUserType()
     
-    const renderUserType = () => {
-        return type === 'admin' ? '| ADMIN' : ''
-    }
-
+    const renderUserType = type === 'admin' ? '| ADMIN' : ''
+    
     const renderPath = (path) => {
         return type === 'admin'? `/admin/${path}` : path
     }
@@ -37,7 +35,7 @@ const TopNav = () => {
 
                         <div className="flex space-x-4">
                             <div>
-                                <Link to="/" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                                <Link to="/dashboard" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                                     <span className="font-bold">E-learning-system {renderUserType} </span>
                                 </Link>
                             </div>
