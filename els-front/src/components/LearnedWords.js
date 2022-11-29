@@ -5,7 +5,7 @@ const LearnedWords = ({ user }) => {
     const renderLearnedWords = () => {
         return user.learned_words.map(learned_word => {
             return (
-                <div className="flex justify-around">
+                <div className="flex justify-around" key={learned_word.id}>
                     <p className="font-medium text-gray-900 truncate dark:text-white">
                         {learned_word.word.word}
                     </p>

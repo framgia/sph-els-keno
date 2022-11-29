@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Activities from "./Activities";
 import useUser from "../hooks/useUser";
 import LearnedWords from "./LearnedWords";
+import { loadingScreenShow } from "../plugins/loader";
 
 const Dashboard = () => {
     const { user } = useUser();
@@ -17,7 +18,7 @@ const Dashboard = () => {
         return null;
     }
 
-    if(!user) return null;
+    if(!user) return loadingScreenShow();
 
     return (
         <div className="flex flex-row">

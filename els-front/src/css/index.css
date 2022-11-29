@@ -2,3 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.loading-screen {
+    height: 80vh;
+    @apply flex justify-center items-center;
+}
