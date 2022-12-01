@@ -15,6 +15,8 @@ class Result extends Model
         'score'
     ];
 
+    protected $with = ['quiz'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

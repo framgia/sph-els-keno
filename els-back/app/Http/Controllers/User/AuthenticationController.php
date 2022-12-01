@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -57,9 +58,20 @@ class AuthenticationController extends Controller
         return "success";
     }
 
+    public function getActivities($followed_ids) 
+    {
+        return Activity::whereIn('user_id',$followed_ids)->with('activityable','user')->orderBy('created_at','desc')->get();
+    }
 
     public function details(Request $request)
     {
-        return response()->json($request->user(), 200);
+        $user = $request->user()->load('learned_words.word','follows','followers','results');
+
+        $followed_ids = $user->follows()->pluck('id')->toArray();
+        $followed_ids[] = $user->id;
+
+        $user->activities = $this->getActivities($followed_ids);
+
+        return response()->json($user, 200);
     }
 }

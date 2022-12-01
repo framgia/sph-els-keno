@@ -16,11 +16,20 @@ class Activity extends Model
         'action'
     ];
 
+    protected $appends = ['type'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }
 
     public function activityable() {   
         return $this->morphTo();
+    }
+
+    public function getTypeAttribute() {
+        if($this->activityable instanceof Following)
+            return 'followings';
+        else if ($this->activityable instanceof Result)
+            return 'results';
     }
 }

@@ -16,6 +16,8 @@ const useUser = () => {
             }
             
             checkUser()
+        } else {
+            setUser('unauthenticated')
         }
   },[]);
 
