@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import {
-    useLocation,
     useRoutes,
 } from "react-router-dom";
 import Main from "../../components/Main.js";
