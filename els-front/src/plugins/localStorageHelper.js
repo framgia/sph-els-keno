@@ -13,11 +13,3 @@ export const getUserType = () =>{
 export const setUserType = (value) => {
     localStorage.setItem('access_type', window.btoa(value))
 }
-
-export const setPreviousPath = (value) => {
-    localStorage.setItem('previous_path',window.btoa(value))
-}
-
-export const getPreviousPath = () => {
-    return localStorage.getItem('previous_path') ? window.atob(localStorage.getItem('previous_path')) : ''
-}

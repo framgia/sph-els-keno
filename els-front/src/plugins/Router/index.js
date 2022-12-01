@@ -11,15 +11,8 @@ import Dashboard from "../../components/Dashboard.js";
 import Login from "../../components/Login.js";
 import Register from "../../components/Register.js";
 import Categories from "../../components/admin/Categories";
-import { setPreviousPath } from "../localStorageHelper.js";
 
 const Routes = ({ user }) => {
-    
-    const location = useLocation();
-
-    useEffect(() => {
-        setPreviousPath(location.pathname)
-    }, [location]);
 
     let routes = useRoutes([
         { 
