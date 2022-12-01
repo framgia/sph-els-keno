@@ -4,7 +4,7 @@ import {
 import { getUserType } from '../plugins/localStorageHelper';
   
 const ProtectedRoute = ({ user, redirectPath = '/', type, otherAuthenticatedRedirectPath, for_auth = false, children }) => {
-    console.log(for_auth,user)
+    
     if(user) {
         if(for_auth && typeof user === 'object') {
             return <Navigate to={redirectPath} replace />;
