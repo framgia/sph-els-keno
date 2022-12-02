@@ -33,4 +33,7 @@ class Activity extends Model
             return 'results';
     }
 
+    public function scopeGetActivities($query, $user_ids) {
+        return $query->whereIn('user_id',$user_ids)->with('activityable','user')->orderBy('created_at','desc');
+    }
 }

@@ -21,7 +21,7 @@ class UserController extends Controller
         $authenticated_user = $request->user();
         $user->load('learned_words.word','follows','followers','results');
     
-        $user->activities = Activity::whereIn('user_id',$user->scopeMineAndFollowingIds())->with('activityable','user')->orderBy('created_at','desc')->get();
+        $user->activities = Activity::getActivities($user->mineAndFollowingIds())->get();
         $user->is_followed_by_user = $authenticated_user->follows()->where('followed_id',$user->id)->exists();
 
         return response()->json($user, 200);

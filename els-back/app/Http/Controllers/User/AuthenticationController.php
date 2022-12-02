@@ -62,8 +62,8 @@ class AuthenticationController extends Controller
     public function details(Request $request)
     {
         $user = $request->user()->load('learned_words.word','follows','followers','results');
-
-        $user->activities = Activity::whereIn('user_id',$user->scopeMineAndFollowingIds())->with('activityable','user')->orderBy('created_at','desc')->get();
+        
+        $user->activities = Activity::getActivities($user->mineAndFollowingIds())->get();
 
         return response()->json($user, 200);
     }
