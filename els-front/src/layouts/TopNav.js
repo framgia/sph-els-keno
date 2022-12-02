@@ -35,7 +35,7 @@ const TopNav = () => {
 
                         <div className="flex space-x-4">
                             <div>
-                                <Link to="/dashboard" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                                <Link to="/" className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                                     <span className="font-bold">E-learning-system {renderUserType} </span>
                                 </Link>
                             </div>
@@ -43,10 +43,10 @@ const TopNav = () => {
 
                         <div className="hidden md:flex items-center space-x-1">
                             <Link to={`${renderPath('categories')}`} className="py-5 px-3">Categories</Link>
-                            <Link to="/" className="py-5 px-3">Users</Link>
+                            <Link to="/users" className="py-5 px-3">Users</Link>
                             <div 
                                 className="py-5 px-3 cursor-pointer hover:bg-slate-100"
-                                onClick={logoutUser}    
+                                onClick={() => logoutUser()}    
                             >Logout</div>
                         </div>
 
