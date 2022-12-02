@@ -27,10 +27,6 @@ const UpdateProfile = ({user}) => {
         }
     }
 
-    const onSubmit = (formValues) => {
-        handleUpdate(formValues)
-    } 
-
     const validateForm = (formValues) => {
         const errors = {};
 
@@ -62,7 +58,7 @@ const UpdateProfile = ({user}) => {
                     <small className="text-gray-400">Click image to select</small>
                 </div>
                 <Form 
-                    onSubmit={ onSubmit }
+                    onSubmit={ handleUpdate }
                     validate= { validateForm }
                     initialValues={user}
                     render={({ handleSubmit, submitting }) => (
