@@ -32,4 +32,5 @@ class Activity extends Model
         else if ($this->activityable instanceof Result)
             return 'results';
     }
+
 }

@@ -1,10 +1,11 @@
 import React from "react";
 import { AiFillEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import useUsers from "../hooks/useUsers";
-import { loadingScreenShow } from "../plugins/loader";
 
 const Users = () => {
     const { users } = useUsers();
+    const navigate = useNavigate();
 
     const renderUsers = () => {
         return users.map(user => {
@@ -16,16 +17,13 @@ const Users = () => {
                     {user.email}
                 </td>
                 <td className="py-4 px-6">
-                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" />
+                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" onClick={() => navigate(`/profile/${user.id}`)}/>
                 </td>
             </tr>
         })
     }
-    
-    if(!users) 
-        return loadingScreenShow()
-    else if(users.length === 0) 
-        return <div className="text-center mt-20">No users found</div>
+
+    if(!users) return null;
 
     return (
         <div className="overflow-x-auto relative mt-2">
