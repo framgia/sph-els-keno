@@ -61,8 +61,8 @@ const UpdateProfile = ({user}) => {
                     onSubmit={ handleUpdate }
                     validate= { validateForm }
                     initialValues={user}
-                    render={({ handleSubmit, submitting }) => (
-                        <form onSubmit={ handleSubmit } className="flex w-[30rem] flex-col space-y-10 mt-5 mx-5">
+                    render={({ submitting }) => (
+                        <form  className="flex w-[30rem] flex-col space-y-10 mt-5 mx-5">
                             <Field name="name">
                                 {({ input,meta }) => (
                                     <div className="h-5">
