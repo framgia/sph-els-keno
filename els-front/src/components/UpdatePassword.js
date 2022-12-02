@@ -17,10 +17,6 @@ const UpdatePassword = () => {
         
     }
 
-    const onSubmit = (formValues) => {
-        handleUpdate(formValues)
-    } 
-
     const validateForm = (formValues) => {
         const errors = {};
 
@@ -41,7 +37,7 @@ const UpdatePassword = () => {
         <div className="w-full h-full mt-16 ml-2 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="text-4xl font-medium">Update password</div>
             <Form 
-                onSubmit={ onSubmit }
+                onSubmit={ handleUpdate }
                 validate= { validateForm }
                 render={({ handleSubmit, submitting }) => (
                     <form onSubmit={ handleSubmit } className="flex w-[30rem] flex-col space-y-10 mt-5 mx-5">
