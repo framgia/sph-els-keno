@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\AuthenticationController;
 use App\Http\Controllers\User\CategoryController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,5 +18,10 @@ Route::group( ['middleware' => ['auth:user-api','scopes:user'] ],function(){
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories','index');
         Route::post('/categories/{category}','logout');
+        
+    });
+    Route::controller(UserController::class)->group(function() {
+        Route::get('users','index');
+        Route::post('follow-or-unfollow','followOrUnfollow');
     });
 });
