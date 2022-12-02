@@ -5,7 +5,6 @@ import { loadingScreenShow } from "../plugins/loader";
 
 const Users = () => {
     const { users } = useUsers();
-    console.log(users)
 
     const renderUsers = () => {
         return users.map(user => {
