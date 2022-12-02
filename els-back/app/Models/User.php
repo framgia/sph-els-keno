@@ -62,4 +62,11 @@ class User extends Authenticatable
     public function activities() {
         return $this->hasMany(Activity::class);
     }
+
+    public function scopeMineAndFollowingIds() {
+        $followed_ids = $this->follows()->pluck('id')->toArray();
+        $followed_ids[] = $this->id;
+
+        return $followed_ids;
+    }
 }
