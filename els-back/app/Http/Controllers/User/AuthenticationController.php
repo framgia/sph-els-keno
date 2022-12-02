@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use League\OAuth2\Server\RequestEvent;
 
 class AuthenticationController extends Controller
 {
@@ -38,7 +40,7 @@ class AuthenticationController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        if(User::where('email',$request->email)->exists()) return response()->json(['error' => ['Credentials not valid.']], 422);
+        if(User::where('email',$request->email)->exists()) return response()->json(['message' => 'Credentials not valid.'], 422);
 
         $user = User::create([
             "name" => $request->name,
@@ -66,5 +68,47 @@ class AuthenticationController extends Controller
         $user->activities = Activity::getActivities($user->mineAndFollowingIds())->get();
 
         return response()->json($user, 200);
+    }
+
+    public function uploadAvatar($avatar,$user_name,$path = 'avatar') 
+    {
+        if(!$avatar){
+            return null;
+        }
+        list(, $avatar) = explode(',', $avatar);
+        $data = base64_decode($avatar);
+        $name =  $user_name.date("YmdHis").'.png';
+
+        if(!file_exists(public_path($path))){
+            mkdir(public_path($path), 0777, true);
+        }
+
+        file_put_contents(public_path() . '/' . $path . '/' . $name, $data);
+        return '/'.$path . '/' . $name;
+    }
+
+    public function updateCredentials(Request $request)
+    {
+        return $request->user()->update([
+            "name" => $request->name,
+            "email" => $request->email,
+            "avatar" => $this->uploadAvatar($request->avatar,$request->name),
+        ]);
+    }
+
+    public function updatePassword(Request $request){
+        $request->validate([
+            'new_password' => 'required|confirmed',
+            'password' => 'required',
+
+        ]);
+
+        if(!Hash::check($request->password,$request->user()->password)){
+            return response()->json(['message' => 'Wrong Password.'], 422); 
+        }
+
+        $request->user()->update([
+            'password' => $request->new_password,
+        ]);
     }
 }
