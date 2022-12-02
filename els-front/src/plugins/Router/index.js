@@ -9,6 +9,7 @@ import Dashboard from "../../components/Dashboard.js";
 import Login from "../../components/Login.js";
 import Register from "../../components/Register.js";
 import Categories from "../../components/admin/Categories";
+import Users from "../../components/Users.js";
 
 const Routes = ({ user }) => {
 
@@ -28,6 +29,10 @@ const Routes = ({ user }) => {
                     path : "dashboard",
                     element : <Dashboard />
                 },
+                {
+                    path : "users",
+                    element : <Users />
+                }
             ]
         },
         {
