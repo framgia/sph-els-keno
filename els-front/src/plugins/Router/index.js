@@ -8,6 +8,7 @@ import Profile from "../../components/Profile.js";
 import Dashboard from "../../components/Dashboard.js";
 import Login from "../../components/Login.js";
 import Register from "../../components/Register.js";
+import AdminCategories from "../../components/admin/Categories";
 import Categories from "../../components/admin/Categories";
 import Users from "../../components/Users.js";
 
@@ -30,6 +31,10 @@ const Routes = ({ user }) => {
                     element : <Dashboard />
                 },
                 {
+                    path : "categories",
+                    element : <Categories />
+                },
+                {
                     path : "users",
                     element : <Users />
                 }
@@ -44,7 +49,7 @@ const Routes = ({ user }) => {
             children : [
                 {
                     path : "categories",
-                    element : <Categories />
+                    element : <AdminCategories />
                 }
             ]
         },
