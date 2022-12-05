@@ -22,4 +22,9 @@ class Choice extends Model
     public function word(){
         return $this->belongsTo(Word::class);
     }
+
+    public function scopeCorrect($query)
+    {
+        return $query->where('correct_answer',1);
+    }
 }

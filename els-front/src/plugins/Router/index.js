@@ -12,6 +12,7 @@ import AdminCategories from "../../components/admin/Categories";
 import Categories from "../../components/Categories";
 import Users from "../../components/Users.js";
 import Lessons from "../../components/Lessons.js";
+import LessonQuiz from "../../components/LessonQuiz.js";
 
 const Routes = ({ user }) => {
 
@@ -38,6 +39,10 @@ const Routes = ({ user }) => {
                 {
                     path : 'categories/:id/lessons',
                     element : <Lessons />
+                },
+                {
+                    path : 'lessons/:id',
+                    element : <LessonQuiz />
                 },
                 {
                     path : "users",
