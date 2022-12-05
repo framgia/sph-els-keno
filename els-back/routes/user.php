@@ -12,6 +12,8 @@ Route::group( ['middleware' => ['auth:user-api','scopes:user'] ],function(){
     Route::controller(AuthenticationController::class)->group(function () {
         Route::get('/details','details');
         Route::post('/logout','logout');
+        Route::post('/update-credentials','updateCredentials');
+        Route::post('/update-password','updatePassword');
     });
 
     Route::controller(UserController::class)->group(function() {

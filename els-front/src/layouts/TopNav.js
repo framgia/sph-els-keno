@@ -43,10 +43,10 @@ const TopNav = () => {
 
                         <div className="hidden md:flex items-center space-x-1">
                             <Link to={`${renderPath('categories')}`} className="py-5 px-3">Categories</Link>
-                            <Link to="/users" className="py-5 px-3">Users</Link>
+                            <Link to="/" className="py-5 px-3">Users</Link>
                             <div 
                                 className="py-5 px-3 cursor-pointer hover:bg-slate-100"
-                                onClick={() => logoutUser()}    
+                                onClick={logoutUser}    
                             >Logout</div>
                         </div>
 

@@ -17,6 +17,7 @@ httpClient.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   let messages = []
+
   switch (error.response.status) {
       case 404:
           // messages.push('nous n'avons pas trouvé cette page')

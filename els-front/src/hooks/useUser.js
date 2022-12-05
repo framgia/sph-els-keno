@@ -12,7 +12,10 @@ const useUser = () => {
         if(token && type) {
             const checkUser = async () => {
                 const response = await api.get(`${type}/details`)
-                setUser(response.data)
+                setUser({
+                    ...response.data,
+                    avatar : response.data ? process.env.REACT_APP_API_URL+response.data.avatar : null,
+                })
             }
             
             checkUser()
