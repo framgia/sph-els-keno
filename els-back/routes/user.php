@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\AuthenticationController;
 use App\Http\Controllers\User\CategoryController;
+use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,12 +20,14 @@ Route::group( ['middleware' => ['auth:user-api','scopes:user'] ],function(){
 
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories','index');
-        Route::post('/categories/{category}','logout');
-        
+        Route::get('/categories/{category}','show');        
     });
     Route::controller(UserController::class)->group(function() {
         Route::get('users','index');
         Route::get('users/{user}','show');
         Route::post('follow-or-unfollow','followOrUnfollow');
+    });
+    Route::controller(QuizController::class)->group(function () {
+        Route::get('/quizzes/{quiz}','show');
     });
 });

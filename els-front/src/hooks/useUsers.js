@@ -3,7 +3,7 @@ import api from '../plugins/axios'
 import { getUserToken, getUserType } from "../plugins/localStorageHelper";
 
 const useUsers = () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
 
   useEffect(() => {
         const token = getUserToken()

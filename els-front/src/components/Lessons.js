@@ -1,34 +1,37 @@
 import React from "react";
-import { AiFillEye } from "react-icons/ai";
-import useUsers from "../hooks/useUsers";
+import { MdQuiz } from "react-icons/md";
+import { useParams } from "react-router-dom";
+import useLessons from "../hooks/useLessons";
 import { loadingScreenShow } from "../plugins/loader";
 
-const Users = () => {
-    const { users } = useUsers();
+const Lessons = () => {
+    const { id } = useParams()
+    const { lessons,categoryName } = useLessons(id);
 
-    const renderUsers = () => {
-        return users.map(user => {
-            return <tr key={user.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    const renderLessons = () => {
+        return lessons.map(lesson => {
+            return <tr key={lesson.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {user.name}
+                    {lesson.name}
                 </th>
                 <td className="py-4 px-6">
-                    {user.email}
-                </td>
-                <td className="py-4 px-6">
-                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" />
+                    <div className="flex text-green-600 hover:text-green-400">
+                        <span className=" text-xl">Take</span>
+                        <MdQuiz className="pl-2 text-2xl"/>
+                    </div>
                 </td>
             </tr>
         })
     }
     
-    if(!users) 
+    if(!lessons) 
         return loadingScreenShow()
-    else if(users.length === 0) 
-        return <div className="text-center mt-20">No users found</div>
+    else if(lessons.length === 0) 
+        return <div className="text-center mt-20">No lessons found</div>
 
     return (
         <div className="overflow-x-auto relative mt-2">
+            <div className="text-3xl my-5">{categoryName}</div>
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -36,19 +39,16 @@ const Users = () => {
                             Name
                         </th>
                         <th scope="col" className="py-3 px-6">
-                            Email
-                        </th>
-                        <th scope="col" className="py-3 px-6">
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {renderUsers()}
+                    {renderLessons()}
                 </tbody>
             </table>
         </div>
     )
 }
 
-export default Users;
+export default Lessons;

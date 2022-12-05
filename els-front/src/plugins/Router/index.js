@@ -9,8 +9,9 @@ import Dashboard from "../../components/Dashboard.js";
 import Login from "../../components/Login.js";
 import Register from "../../components/Register.js";
 import AdminCategories from "../../components/admin/Categories";
-import Categories from "../../components/admin/Categories";
+import Categories from "../../components/Categories";
 import Users from "../../components/Users.js";
+import Lessons from "../../components/Lessons.js";
 
 const Routes = ({ user }) => {
 
@@ -23,7 +24,7 @@ const Routes = ({ user }) => {
                 </ProtectedRoute>,
             children : [
                 {
-                    path : "profile/:id",
+                    path : "profile",
                     element : <Profile />
                 },
                 {
@@ -32,12 +33,16 @@ const Routes = ({ user }) => {
                 },
                 {
                     path : "categories",
-                    element : <Categories />
+                    element : <Categories />,
+                },
+                {
+                    path : 'categories/:id/lessons',
+                    element : <Lessons />
                 },
                 {
                     path : "users",
                     element : <Users />
-                }
+                },
             ]
         },
         {

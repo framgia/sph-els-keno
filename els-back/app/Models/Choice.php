@@ -15,6 +15,10 @@ class Choice extends Model
         'correct_answer',
     ];
 
+    protected $hidden = [
+        'correct_answer',
+    ];
+
     public function word(){
         return $this->belongsTo(Word::class);
     }
