@@ -4,6 +4,7 @@ import useQuizWords from "../hooks/useQuizWords";
 import { loadingScreenShow } from "../plugins/loader";
 import api from '../plugins/axios'
 import Results from "./Results";
+import Button from "../Button";
 
 const LessonQuiz = () => {
     const { id } = useParams();
@@ -31,34 +32,34 @@ const LessonQuiz = () => {
 
     const renderPreviousButton = () => {
         if(wordIndex > 0){
-            return <button onClick={() => setWordIndex(wordIndex-1)} type="button" className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
+            return <Button 
+                btnClass="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2"
+                onClick={() => setWordIndex(wordIndex-1)}>
                 Previous
-            </button>
+            </Button>
         }
     }
 
     const renderDoneButton = () => {
         if(isDone){
-            return <button 
+            return <Button 
                 onClick={() => submitAnswers()}
-                type="button" 
-                className="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-green-500 dark:hover:bg-green-700 mr-2 mb-2">
+                btnClass="text-white bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-green-500 dark:hover:bg-green-700 mr-2 mb-2">
                 Done
-            </button> 
+            </Button> 
         }
     }
 
     const renderChoices = (choices) => {
         return choices.map(({ choice,id }) => {
             return (
-                <button 
+                <Button 
                     key={id}
                     onClick={() => setAnswer(id)}
-                    type="button" 
-                    className={`text-white w-full ${quizWords[wordIndex].choice_id === id ? 'bg-blue-700':'bg-blue-400'} hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-[#1da1f2]/55 mr-2 mb-2`}
+                    btnClass={`text-white w-full ${quizWords[wordIndex].choice_id === id ? 'bg-blue-700':'bg-blue-400'} hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-[#1da1f2]/55 mr-2 mb-2`}
                 >
                     {choice}
-                </button>
+                </Button>
             )
         })
     }

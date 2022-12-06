@@ -8,7 +8,7 @@ import UpdateProfile from "./UpdateProfile";
 import UpdatePassword from "./UpdatePassword";
 
 const Dashboard = () => {
-    const { user } = useUser();
+    const { user,checkUser } = useUser();
     const [activeTab, setActiveTab] = useState('learned_words');
 
     const renderActiveTab = () => {
@@ -17,7 +17,7 @@ const Dashboard = () => {
         else if (activeTab === 'activities')
             return <Activities user={user}/>
         else if (activeTab === 'update_credentials')
-            return <UpdateProfile user={user}/>
+            return <UpdateProfile refreshUser={() => checkUser()} user={user}/>
         else if (activeTab === 'update_password')
             return <UpdatePassword/>
 
