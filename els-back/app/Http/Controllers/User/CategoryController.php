@@ -15,7 +15,7 @@ class CategoryController extends Controller
         return Category::paginate($per_page);
     }
 
-    public function show(Request $request,$category)
+    public function show(Request $request,Category $category)
     {
         return $category->load('quizzes');
     }
