@@ -69,4 +69,16 @@ class User extends Authenticatable
 
         return $followed_ids;
     }
+
+    public function addLearnedWords($checked_answers,$result_id)
+    {
+        foreach($checked_answers as $checked_answer){
+            if($checked_answer['correct'] === 1) {
+                $this->learned_words()->create([
+                    'word_id' => $checked_answer['word']['id'],
+                    'result_id' => $result_id
+                ]);
+            }
+        }
+    }
 }

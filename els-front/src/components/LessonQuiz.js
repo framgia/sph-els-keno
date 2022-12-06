@@ -11,10 +11,6 @@ const LessonQuiz = () => {
     const [wordIndex, setWordIndex] = useState(0);
     const [isDone, setIsDone] = useState(false);
     const [results, setResults] = useState(null);
-    
-    useEffect(() => {
-        console.log(results)
-    }, [results]);
 
     const submitAnswers = async() => {
         const response = await api.post(`user/quiz-check-results/${id}`,{
