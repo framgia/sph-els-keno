@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Field } from 'react-final-form'
 import { useNavigate } from "react-router-dom";
-import Button from "../Button";
+import Button from "./Button";
 import api from '../plugins/axios'
 import { successNotify } from "../plugins/toast";
 
@@ -90,7 +90,8 @@ const UpdatePassword = () => {
                             )}
                         </Field> 
                         <Button 
-                            type="submit" submitting={submitting}
+                            type="submit" 
+                            isDisabled={submitting}
                         > Update</Button>
                     </form>
                 )}

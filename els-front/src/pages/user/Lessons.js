@@ -1,13 +1,12 @@
 import React from "react";
 import { MdQuiz } from "react-icons/md";
-import { useNavigate, useParams } from "react-router-dom";
-import useLessons from "../hooks/useLessons";
-import { loadingScreenShow } from "../plugins/loader";
+import { useParams } from "react-router-dom";
+import useLessons from "../../hooks/useLessons";
+import { loadingScreenShow } from "../../plugins/loader";
 
 const Lessons = () => {
     const { id } = useParams()
     const { lessons,categoryName } = useLessons(id);
-    const navigate = useNavigate();
 
     const renderLessons = () => {
         return lessons.map(lesson => {
@@ -16,7 +15,7 @@ const Lessons = () => {
                     {lesson.name}
                 </th>
                 <td className="py-4 px-6">
-                    <div onClick={() => navigate(`/lessons/${lesson.id}`)} className="flex text-green-600 cursor-pointer hover:text-green-400">
+                    <div className="flex text-green-600 hover:text-green-400">
                         <span className=" text-xl">Take</span>
                         <MdQuiz className="pl-2 text-2xl"/>
                     </div>

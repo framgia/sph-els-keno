@@ -5,7 +5,7 @@ import api from '../plugins/axios'
 import { errorNotify, successNotify } from "../plugins/toast";
 import { setUserToken, setUserType } from "../plugins/localStorageHelper";
 import { pathType } from "../plugins/Router/routeHelper";
-import Button from "../Button";
+import Button from "./Button";
 
 const Login = () => {
     const loginType = pathType(useLocation())
@@ -95,8 +95,7 @@ const Login = () => {
                             )}
                         </Field>
                         <Button 
-                            type="submit" submitting={submitting}
-                            btnClass="transform rounded-sm text-white bg-blue-600 py-2 font-bold duration-300 hover:bg-blue-800"
+                            type="submit" isDisabled={submitting}
                         > LOG IN</Button>
                     </form>
                 )}

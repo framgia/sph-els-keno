@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillEye } from "react-icons/ai";
-import useUsers from "../hooks/useUsers";
-import { loadingScreenShow } from "../plugins/loader";
+import useUsers from "../../hooks/useUsers";
+import { loadingScreenShow } from "../../plugins/loader";
 
 const Users = () => {
     const { users } = useUsers();

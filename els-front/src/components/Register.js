@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Field } from 'react-final-form'
 import { useNavigate } from "react-router-dom";
-import Button from "../Button";
+import Button from "./Button";
 import api from '../plugins/axios'
 import { successNotify } from "../plugins/toast";
 
@@ -113,8 +113,7 @@ const Register = () => {
                             )}
                         </Field>
                         <Button 
-                            type="submit" submitting={submitting}
-                            className="transform rounded-sm text-white bg-blue-600 py-2 font-bold duration-300 hover:bg-blue-800"
+                            type="submit" isDisabled={submitting}
                         > Register</Button>
                     </form>
                 )}
