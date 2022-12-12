@@ -1,35 +1,32 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Form, Field } from 'react-final-form'
-import api from '../plugins/axios'
-import { errorNotify, successNotify } from "../plugins/toast";
-import { setUserToken, setUserType } from "../plugins/localStorageHelper";
-import { pathType } from "../plugins/Router/routeHelper";
-import Button from "./Button";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
+import api from '../../plugins/axios'
+import { successNotify } from "../../plugins/toast";
 
-const Login = () => {
-    const loginType = pathType(useLocation())
-    const handleLogin = async ( formValues ) => {
-        const response = await api.post(`${loginType}/login`, formValues)
-     
-        if(response.data.error) {
-            errorNotify('Invalid credentails')
-        } else {
-            successNotify("Login successfully")
-            setUserToken(response.data.token)
-            setUserType(loginType)
-            
-            window.location.reload();
+const Register = () => {
+    const navigate = useNavigate();
+
+    const handleRegistration = async(formValues) => {
+        const response = await api.post(`user/register`, formValues)
+
+        if(response) {
+            successNotify('Registered successfully')
+            navigate('../login')
         }
-    
+        
     }
 
     const onSubmit = (formValues) => {
-        handleLogin(formValues)
+        handleRegistration(formValues)
     } 
 
     const validateForm = (formValues) => {
         const errors = {};
+
+        if(!formValues.name) 
+            errors.name = "Name is required"
 
         if(!formValues.email) 
             errors.email = "Email is required"
@@ -38,31 +35,37 @@ const Login = () => {
 
         if(!formValues.password)
             errors.password = "Password is required"
+        else if(formValues.password !== formValues.password_confirmation){
+            errors.password = "Password does not match"
+            errors.password_confirmation = "Password does not match"
+        }
 
         return errors;
     } 
 
-    const renderRegistration = () => {
-        return loginType === "user" ? 
-        <p className="text-center text-lg">
-            No account?
-            <Link 
-                to="/auth/register"
-                className="font-medium pl-1 text-blue-500 underline-offset-4 hover:underline"
-            >
-                Create One
-            </Link>
-        </p> : null
-    }
-
     return (
         <div className="flex w-[30rem] flex-col space-y-10">
-            <div className="text-center text-4xl font-medium">Log In {loginType.toUpperCase()}</div>
+            <div className="text-center text-4xl font-medium">Register</div>
             <Form 
                 onSubmit={ onSubmit }
                 validate= { validateForm }
                 render={({ handleSubmit, submitting }) => (
                     <form onSubmit={ handleSubmit } className="flex w-[30rem] flex-col space-y-10">
+                        <Field name="name">
+                            {({ input,meta }) => (
+                                <div className="h-12">
+                                    <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-blue-500">
+                                        <input
+                                            {...input}
+                                            type="text"
+                                            placeholder="Name"
+                                            className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+                                        />
+                                    </div>
+                                    {meta.error && meta.touched && <span className="text-red-300">{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
                         <Field name="email">
                             {({ input,meta }) => (
                                 <div className="h-12">
@@ -94,16 +97,30 @@ const Login = () => {
                                 
                             )}
                         </Field>
+                        <Field name="password_confirmation">
+                            {({ input, meta }) => (
+                                <div className="h-12">
+                                    <div className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-blue-500">
+                                        <input
+                                            {...input}
+                                            type="password"
+                                            placeholder="Confirm password"
+                                            className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+                                        />
+                                    </div>
+                                    {meta.error && meta.touched && <span className="text-red-300">{meta.error}</span>}
+                                </div>
+                            )}
+                        </Field>
                         <Button 
                             type="submit" isDisabled={submitting}
-                        > LOG IN</Button>
+                        > Register</Button>
                     </form>
                 )}
             >
             </Form>
-            {renderRegistration()}
         </div>
     )
 }
 
-export default Login;
+export default Register;

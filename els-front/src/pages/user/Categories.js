@@ -14,8 +14,7 @@ const Categories = () => {
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{category.name}</h5>
                 <p className="font-normal text-gray-700 dark:text-gray-400">{category.description}</p>
                 <Button 
-                    usage="category_start"
-                    btnClass=" mb-2 px-5 float-right "
+                    btnClass="mt-5 b-0 mb-2 px-5 float-right rounded-2xl"
                     onClick={() => navigate(`/categories/${category.id}/lessons`)}
                 >Start</Button>
             </div>

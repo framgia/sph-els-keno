@@ -17,12 +17,9 @@ class WordSeeder extends Seeder
         $quizzes = Quiz::all();
 
         foreach($quizzes as $quiz) {
-            for($i=1;$i<=20;$i++){
-
-                $quiz->words()->create([
-                    "word" => "Word $i",
-                ]);
-            }
+            $quiz->words()->create([
+                "word" => "Word 1",
+            ]);
         }
     }
 }
