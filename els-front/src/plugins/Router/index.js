@@ -4,10 +4,10 @@ import {
 import Main from "../../templates/Main.js";
 import Auth from "../../templates/Auth";
 
-import Register from "../../components/Register.js";
-import Login from "../../components/Login.js";
 import ProtectedRoute from "../../components/ProtectedRoute.js";
 
+import Register from "../../pages/user/Register.js";
+import Login from "../../pages/user/Login.js";
 import Profile from "../../pages/user/Profile.js";
 import Dashboard from "../../pages/user/Dashboard.js";
 import Categories from "../../pages/user/Categories";
@@ -16,6 +16,7 @@ import Lessons from "../../pages/user/Lessons.js";
 import LessonQuiz from "../../pages/user/LessonQuiz.js";
 
 import AdminCategories from "../../pages/admin/Categories";
+import CategoryForm from "../../pages/admin/CategoryForm.js";
 
 const Routes = ({ user }) => {
 
@@ -28,7 +29,7 @@ const Routes = ({ user }) => {
                 </ProtectedRoute>,
             children : [
                 {
-                    path : "profile",
+                    path : "profile/:id",
                     element : <Profile />
                 },
                 {
@@ -37,7 +38,7 @@ const Routes = ({ user }) => {
                 },
                 {
                     path : "categories",
-                    element : <Categories />,
+                    element : <Categories />
                 },
                 {
                     path : 'categories/:id/lessons',
@@ -50,7 +51,7 @@ const Routes = ({ user }) => {
                 {
                     path : "users",
                     element : <Users />
-                },
+                }
             ]
         },
         {
@@ -63,7 +64,16 @@ const Routes = ({ user }) => {
                 {
                     path : "categories",
                     element : <AdminCategories />
+                },
+                {
+                    path : "categories/create",
+                    element : <CategoryForm />
+                },
+                {
+                    path : "categories/edit/:id",
+                    element : <CategoryForm />
                 }
+                
             ]
         },
         { 

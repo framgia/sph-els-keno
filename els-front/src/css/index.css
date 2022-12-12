@@ -7,3 +7,7 @@
     height: 80vh;
     @apply flex justify-center items-center;
 }
+
+.modal-design {
+    @apply fixed flex items-center justify-center h-screen z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 md:h-screen;
+}
