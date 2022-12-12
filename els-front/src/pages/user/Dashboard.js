@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Activities from "./Activities";
-import useUser from "../hooks/useUser";
-import LearnedWords from "./LearnedWords";
-import { loadingScreenShow } from "../plugins/loader";
-import UpdateProfile from "./UpdateProfile";
-import UpdatePassword from "./UpdatePassword";
+import Activities from "../../components/Activities";
+import useUser from "../../hooks/useUser";
+import LearnedWords from "../../components/LearnedWords";
+import { loadingScreenShow } from "../../plugins/loader";
+import UpdateProfile from "../../components/UpdateProfile";
+import UpdatePassword from "../../components/UpdatePassword";
 
 const Dashboard = () => {
     const { user } = useUser();

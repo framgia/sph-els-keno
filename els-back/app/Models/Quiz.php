@@ -26,4 +26,34 @@ class Quiz extends Model
     public function results(){
         return $this->hasMany(Result::class);
     }
+
+    static function checkResult($answers)
+    {
+        $checked_answers = [];
+        $score = 0;
+
+        foreach($answers as $answer) {
+            $word = Word::find($answer['id']);
+            $correct_choice = $word->choices()->correct()->first();
+
+            $answer_result = [
+                "word" => $word,
+                "correct_choice" => $correct_choice->choice,
+                "correct" => 0
+            ];
+
+            if($correct_choice->id === $answer['choice_id']){
+                $score++;
+                $answer_result['correct'] = 1;
+            }
+             
+           $checked_answers[] = $answer_result;
+        }
+
+        return [
+            'checked_answers' =>$checked_answers,
+            'score' =>$score,
+        ];
+    }
+
 }

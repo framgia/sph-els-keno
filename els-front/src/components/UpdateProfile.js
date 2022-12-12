@@ -1,11 +1,11 @@
 import React,{ useRef, useState } from "react";
 import { Form, Field } from 'react-final-form'
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 import api from '../plugins/axios'
 import { successNotify } from "../plugins/toast";
 
-const UpdateProfile = ({user}) => {
-    const navigate = useNavigate();
+const UpdateProfile = ({user,refreshUser}) => {
     const [image, setImage] = useState(user.avatar);
     const inputAvatar = useRef(null);
 
@@ -14,7 +14,7 @@ const UpdateProfile = ({user}) => {
 
         if(response) {
             successNotify('Updated profile successfully')
-            navigate(0)
+            refreshUser()
         }
         
     }
@@ -93,10 +93,9 @@ const UpdateProfile = ({user}) => {
                                     </div>
                                 )}
                             </Field>    
-                            <button 
-                                type="submit" disabled={submitting}
-                                className=" rounded-xl text-white w-1/2 mt-10 bg-blue-600 py-2 font-bold duration-300 hover:bg-blue-800"
-                            > Update</button>
+                            <Button 
+                                type="submit" isDisabled={submitting}
+                            > Update</Button>
                         </form>
                     )}
                 >

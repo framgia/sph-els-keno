@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Field } from 'react-final-form'
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 import api from '../plugins/axios'
 import { successNotify } from "../plugins/toast";
 
@@ -88,10 +89,10 @@ const UpdatePassword = () => {
                                 </div>
                             )}
                         </Field> 
-                        <button 
-                            type="submit" disabled={submitting}
-                            className=" rounded-xl text-white w-1/2 mt-10 bg-blue-600 py-2 font-bold duration-300 hover:bg-blue-800"
-                        > Update</button>
+                        <Button 
+                            type="submit" 
+                            isDisabled={submitting}
+                        > Update</Button>
                     </form>
                 )}
             >

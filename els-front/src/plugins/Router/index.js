@@ -1,17 +1,21 @@
 import {
     useRoutes,
 } from "react-router-dom";
-import Main from "../../components/Main.js";
-import Auth from "../../components/Auth";
-import ProtectedRoute from "../../components/ProtectedRoute.js";
-import Profile from "../../components/Profile.js";
-import Dashboard from "../../components/Dashboard.js";
-import Login from "../../components/Login.js";
+import Main from "../../templates/Main.js";
+import Auth from "../../templates/Auth";
+
 import Register from "../../components/Register.js";
-import AdminCategories from "../../components/admin/Categories";
-import Categories from "../../components/Categories";
-import Users from "../../components/Users.js";
-import Lessons from "../../components/Lessons.js";
+import Login from "../../components/Login.js";
+import ProtectedRoute from "../../components/ProtectedRoute.js";
+
+import Profile from "../../pages/user/Profile.js";
+import Dashboard from "../../pages/user/Dashboard.js";
+import Categories from "../../pages/user/Categories";
+import Users from "../../pages/user/Users.js";
+import Lessons from "../../pages/user/Lessons.js";
+import LessonQuiz from "../../pages/user/LessonQuiz.js";
+
+import AdminCategories from "../../pages/admin/Categories";
 
 const Routes = ({ user }) => {
 
@@ -38,6 +42,10 @@ const Routes = ({ user }) => {
                 {
                     path : 'categories/:id/lessons',
                     element : <Lessons />
+                },
+                {
+                    path : 'lessons/:id',
+                    element : <LessonQuiz />
                 },
                 {
                     path : "users",

@@ -1,8 +1,8 @@
 import React from "react";
 import { MdQuiz } from "react-icons/md";
 import { useParams } from "react-router-dom";
-import useLessons from "../hooks/useLessons";
-import { loadingScreenShow } from "../plugins/loader";
+import useLessons from "../../hooks/useLessons";
+import { loadingScreenShow } from "../../plugins/loader";
 
 const Lessons = () => {
     const { id } = useParams()

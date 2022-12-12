@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Activities from "./Activities";
-import useProfile from "../hooks/useProfile";
-import LearnedWords from "./LearnedWords";
-import { loadingScreenShow } from "../plugins/loader";
-import { successNotify } from "../plugins/toast";
-import api from '../plugins/axios'
+import Activities from "../../components/Activities";
+import useProfile from "../../hooks/useProfile";
+import LearnedWords from "../../components/LearnedWords";
+import { loadingScreenShow } from "../../plugins/loader";
+import { successNotify } from "../../plugins/toast";
+import api from '../../plugins/axios'
+import Button from "../../components/Button";
 
 const Profile = () => {
     const { id } = useParams()
@@ -61,7 +62,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="flex flex-col items-center pt-5 pb-5">
-                        <button className="rounded-full my-2 text-white w-52 bg-blue-300 hover:bg-blue-500" onClick={() => followOrUnfollow()}>{renderFollowingText()}</button>
+                        <Button btnClass="my-2 w-52 bg-blue-300 hover:bg-blue-500" onClick={() => followOrUnfollow()}>{renderFollowingText()}</Button>
                         <div> <Link className={`${activeTab === 'learned_words' ? 'text-gray-500' : 'text-blue-500'} font-medium pl-1  hover:underline`} onClick={() => setActiveTab('learned_words')}> Learned {user.learned_words.length} words </Link></div>
                         {/* <div><Link className="font-medium pl-1 text-blue-500 hover:underline"> Learned {user.results.length} lessons</Link></div> */}
                         <div><Link className={`${activeTab === 'activities' ? 'text-gray-500' : 'text-blue-500'} font-medium pl-1 hover:underline`} onClick={() => setActiveTab('activities')}> Activities</Link></div>
