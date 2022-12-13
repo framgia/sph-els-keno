@@ -29,5 +29,6 @@ Route::group( ['middleware' => ['auth:user-api','scopes:user'] ],function(){
     });
     Route::controller(QuizController::class)->group(function () {
         Route::get('/quizzes/{quiz}','show');
+        Route::post('quiz-check-results/{id}','quizResult');
     });
 });

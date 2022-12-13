@@ -41,8 +41,8 @@ class Quiz extends Model
                 "correct_choice" => $correct_choice->choice,
                 "correct" => 0
             ];
-
-            if($correct_choice->id === $answer['choice_id']){
+            
+            if($correct_choice->id == $answer['choice_id']){
                 $score++;
                 $answer_result['correct'] = 1;
             }

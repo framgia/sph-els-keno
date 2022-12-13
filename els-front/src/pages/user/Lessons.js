@@ -1,11 +1,12 @@
 import React from "react";
 import { MdQuiz } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useLessons from "../../hooks/useLessons";
 import { loadingScreenShow } from "../../plugins/loader";
 
 const Lessons = () => {
     const { id } = useParams()
+    const navigate = useNavigate()
     const { lessons,categoryName } = useLessons(id);
 
     const renderLessons = () => {
@@ -15,7 +16,7 @@ const Lessons = () => {
                     {lesson.name}
                 </th>
                 <td className="py-4 px-6">
-                    <div className="flex text-green-600 hover:text-green-400">
+                    <div onClick={() => navigate(`/lessons/${lesson.id}`)} className="flex  cursor-pointer text-green-600 hover:text-green-400">
                         <span className=" text-xl">Take</span>
                         <MdQuiz className="pl-2 text-2xl"/>
                     </div>
