@@ -31,7 +31,7 @@ const Categories = () => {
                     {category.name}
                 </th>
                 <td className="py-4 px-6 flex">
-                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" />
+                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" onClick={() => navigate(`/admin/category/${category.id}/lessons`)}/>
                     <AiTwotoneDelete className="h-5 w-5 text-red-300 cursor-pointer" onClick={() => setDeletion({  id : category.id,is_deleting : true}) }/>
                     <AiFillEdit className="h-5 w-5 text-red-300 cursor-pointer" onClick={() => navigate(`/admin/categories/edit/${category.id}`)}/>
                 </td>

@@ -17,6 +17,8 @@ import LessonQuiz from "../../pages/user/LessonQuiz.js";
 
 import AdminCategories from "../../pages/admin/Categories";
 import CategoryForm from "../../pages/admin/CategoryForm.js";
+import AdminLessons from "../../pages/admin/Lessons";
+import LessonForm from "../../pages/admin/LessonForm.js";
 
 const Routes = ({ user }) => {
 
@@ -72,7 +74,19 @@ const Routes = ({ user }) => {
                 {
                     path : "categories/edit/:id",
                     element : <CategoryForm />
-                }
+                },
+                {
+                    path : "category/:category_id/lessons/",
+                    element : <AdminLessons />
+                },
+                {
+                    path : "category/:category_id/lessons/create",
+                    element : <LessonForm />
+                },
+                {
+                    path : "category/:category_id/lessons/edit/:id",
+                    element : <LessonForm />
+                },
                 
             ]
         },
