@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import Paginator from "../../components/Paginator";
 import useUsers from "../../hooks/useUsers";
 import { loadingScreenShow } from "../../plugins/loader";
 
 const Users = () => {
-    const { users } = useUsers();
+    const navigate = useNavigate()
+    const [page, setPage] = useState(1);
+    const { users, pageCount } = useUsers(page);
 
     const renderUsers = () => {
         return users.map(user => {
@@ -16,7 +20,7 @@ const Users = () => {
                     {user.email}
                 </td>
                 <td className="py-4 px-6">
-                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" />
+                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" onClick={() => navigate(`/profile/${user.id}`)}/>
                 </td>
             </tr>
         })
@@ -47,6 +51,7 @@ const Users = () => {
                     {renderUsers()}
                 </tbody>
             </table>
+            <Paginator page={page} pageCount={pageCount} setPage={setPage} />
         </div>
     )
 }

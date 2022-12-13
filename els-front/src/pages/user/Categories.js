@@ -1,13 +1,15 @@
-import React from "react";
+import React,{ useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
+import Paginator from "../../components/Paginator";
 import useCategories from "../../hooks/useCategories";
 import { loadingScreenShow } from "../../plugins/loader";
 
 const Categories = () => {
     const navigate = useNavigate();
-    const { categories } = useCategories();
-    
+    const [page, setPage] = useState(1);
+    const { categories, pageCount } = useCategories(page,6);
+
     const renderCategories = () => {
         return categories.map(category => {
             return <div key={category.id} className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -32,6 +34,8 @@ const Categories = () => {
             <div className="grid grid-cols-3 gap-3">
                 {renderCategories()}
             </div>
+            <Paginator page={page} pageCount={pageCount} setPage={setPage} />
+
         </div>
     );
 }
