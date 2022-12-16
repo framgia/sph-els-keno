@@ -11,7 +11,7 @@ import Button from "../../components/Button";
 const Profile = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { user,checkProfile } = useProfile(id);
+    const { user, checkProfile } = useProfile(id);
     const [activeTab, setActiveTab] = useState('learned_words');
 
     const renderFollowingText = () => user.is_followed_by_user ? "UNFOLLOW" : "FOLLOW";
