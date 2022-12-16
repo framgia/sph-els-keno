@@ -17,6 +17,12 @@ class CategoryController extends Controller
 
     public function show(Request $request,Category $category)
     {
-        return $category->load('quizzes');
+        $quizzes_taken_ids = $request->user()->getQuizzesTaken();
+        
+        return $category->load([
+            'quizzes' => function($query) use($quizzes_taken_ids) {
+                $query->notTaken($quizzes_taken_ids);
+            }
+        ]);
     }
 }

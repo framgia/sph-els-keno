@@ -81,4 +81,14 @@ class User extends Authenticatable
             }
         }
     }
+
+    public function getQuizzesTaken() 
+    {
+        return $this->results()->pluck('quiz_id');
+    }
+
+    public function quizCheckIfTaken($quiz_id)
+    {
+        return $this->results()->where('quiz_id',$quiz_id)->exists();
+    }
 }

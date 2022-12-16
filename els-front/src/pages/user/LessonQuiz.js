@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useQuizWords from "../../hooks/useQuizWords";
 import { loadingScreenShow } from "../../plugins/loader";
 import api from '../../plugins/axios'
@@ -12,7 +12,8 @@ const LessonQuiz = () => {
     const [wordIndex, setWordIndex] = useState(0);
     const [isDone, setIsDone] = useState(false);
     const [results, setResults] = useState(null);
-
+    const navigate = useNavigate();
+    
     const submitAnswers = async() => {
         const response = await api.post(`user/quiz-check-results/${id}`,{
             quiz_answers : quizWords
@@ -95,7 +96,12 @@ const LessonQuiz = () => {
     if(!quizWords) 
         return loadingScreenShow()
     else if(quizWords.length === 0) 
-        return <div className="text-center mt-20">No quiz items found</div>
+        return (<>
+            <div className="text-center mt-20">No quiz items found</div>
+            <div className="mt-10 float-right">
+                <Button onClick={() => navigate(-1)} usage="quiz_previous" btnClass="px-5 mr-2 mb-2 "> Go Back </Button>
+            </div>
+        </>)
     
     return (
         <div className="w-full mt-10 px-20">

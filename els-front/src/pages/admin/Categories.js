@@ -14,7 +14,7 @@ const Categories = () => {
         is_deleting : false
     });
     const [page, setPage] = useState(1);
-    const { categories, pageCount,checkCategories } = useCategories(page);
+    const { categories, pageCount, checkCategories } = useCategories(page);
     const navigate = useNavigate();
 
     const deleteCategory = async () => {
