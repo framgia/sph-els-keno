@@ -3,14 +3,13 @@ import {
 } from "react-router-dom";
 import Main from "../../templates/Main.js";
 import Auth from "../../templates/Auth";
+
 import ProtectedRoute from "../../components/ProtectedRoute.js";
 
 import Register from "../../pages/user/Register.js";
 import Login from "../../pages/user/Login.js";
-import Profile from "../../pages/user/Profile.js";
 import Dashboard from "../../pages/user/Dashboard.js";
 import Categories from "../../pages/user/Categories";
-import Users from "../../pages/user/Users.js";
 import Lessons from "../../pages/user/Lessons.js";
 import LessonQuiz from "../../pages/user/LessonQuiz.js";
 
@@ -22,6 +21,9 @@ import AdminWords from "../../pages/admin/Words";
 import WordForm from "../../pages/admin/WordForm.js";
 import AdminChoices from "../../pages/admin/Choices";
 import ChoiceForm from "../../pages/admin/ChoiceForm.js";
+
+import Users from "../../pages/common/Users.js";
+import Profile from "../../pages/common/Profile.js";
 const Routes = ({ user }) => {
 
     let routes = useRoutes([
@@ -33,10 +35,7 @@ const Routes = ({ user }) => {
                 </ProtectedRoute>,
             children : [
                 {
-                    path : "profile/:id",
-                    element : <Profile />
-                },
-                {
+                    
                     path : "dashboard",
                     element : <Dashboard />
                 },
@@ -55,7 +54,11 @@ const Routes = ({ user }) => {
                 {
                     path : "users",
                     element : <Users />
-                }
+                },
+                {
+                    path : "users/profile/:id",
+                    element : <Profile />
+                },
             ]
         },
         {
@@ -112,6 +115,14 @@ const Routes = ({ user }) => {
                 {
                     path : "word/:word_id/choices/edit/:id",
                     element : <ChoiceForm />
+                },
+                {
+                    path : "users",
+                    element : <Users />
+                },
+                {
+                    path : "users/profile/:id",
+                    element : <Profile />
                 },
                 
             ]

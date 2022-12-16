@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Activities from "../../components/Activities";
 import useProfile from "../../hooks/useProfile";
 import LearnedWords from "../../components/LearnedWords";
@@ -7,11 +7,12 @@ import { loadingScreenShow } from "../../plugins/loader";
 import { successNotify } from "../../plugins/toast";
 import api from '../../plugins/axios'
 import Button from "../../components/Button";
+import { getUserType } from "../../plugins/localStorageHelper";
 
 const Profile = () => {
     const { id } = useParams()
-    const navigate = useNavigate()
-    const { user, checkProfile } = useProfile(id);
+    const type = getUserType()
+    const { user,checkProfile } = useProfile(id);
     const [activeTab, setActiveTab] = useState('learned_words');
 
     const renderFollowingText = () => user.is_followed_by_user ? "UNFOLLOW" : "FOLLOW";
@@ -48,7 +49,7 @@ const Profile = () => {
                         <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{user.name}</h5>
                         <span className="text-sm text-gray-500 dark:text-gray-400">{user.email}</span>
                     </div>
-                    <div className="mx-5">
+                    <div className="mx-5 mb-3">
                         <hr  />
                         <div className="flex justify-around">
                             <div className="text-l text-center">
@@ -61,12 +62,12 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center pt-5 pb-5">
+                    {type === "user" && <div className="flex flex-col items-center pt-5 pb-5">
                         <Button btnClass="my-2 w-52 bg-blue-300 hover:bg-blue-500" onClick={() => followOrUnfollow()}>{renderFollowingText()}</Button>
                         <div> <Link className={`${activeTab === 'learned_words' ? 'text-gray-500' : 'text-blue-500'} font-medium pl-1  hover:underline`} onClick={() => setActiveTab('learned_words')}> Learned {user.learned_words.length} words </Link></div>
                         {/* <div><Link className="font-medium pl-1 text-blue-500 hover:underline"> Learned {user.results.length} lessons</Link></div> */}
                         <div><Link className={`${activeTab === 'activities' ? 'text-gray-500' : 'text-blue-500'} font-medium pl-1 hover:underline`} onClick={() => setActiveTab('activities')}> Activities</Link></div>
-                    </div>
+                    </div>}
                 </div>
             </div>
             <div className="basis-3/4">

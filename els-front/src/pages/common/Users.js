@@ -20,7 +20,7 @@ const Users = () => {
                     {user.email}
                 </td>
                 <td className="py-4 px-6">
-                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" onClick={() => navigate(`/profile/${user.id}`)}/>
+                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" onClick={() => navigate(`profile/${user.id}`)}/>
                 </td>
             </tr>
         })
