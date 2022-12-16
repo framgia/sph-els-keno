@@ -24,7 +24,7 @@ const Lessons = () => {
             checkLessons()
         }
         
-        setDeletion({  id : null,is_deleting : false})
+        setDeletion({  id : null, is_deleting : false})
     }
 
     const renderLessons = () => {

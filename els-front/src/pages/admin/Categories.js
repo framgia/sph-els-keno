@@ -25,7 +25,7 @@ const Categories = () => {
             checkCategories()
         }
 
-        setDeletion({  id : null,is_deleting : false})
+        setDeletion({  id : null, is_deleting : false})
     }
 
     const renderCategories = () => {
