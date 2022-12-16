@@ -1,7 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { dateHumanize } from "../plugins/moment";
 
 const Activities = ({ user }) => {
+
+    const redirectPathActivity = ({ type, activityable}) => {
+        if(type = 'followings') 
+            return `/profile/${activityable.followed.id}`
+        else if (type = 'results')
+            return `/lessons/${activityable.quiz.id}`
+    }
 
     const renderActivityable = ({ type, activityable }) => {
         if(type = 'followings') 
@@ -24,9 +32,9 @@ const Activities = ({ user }) => {
                                 <p>
                                     {activity.action}
                                 </p>
-                                <p className="font-medium text-gray-900 truncate dark:text-white">
+                                <Link className="text-blue-500 font-medium hover:underline" to={redirectPathActivity(activity)}>
                                     {renderActivityable(activity)}
-                                </p>
+                                </Link>
                             </div>
                             <p className="text-m text-gray-400 truncate dark:text-gray-400">
                                 {dateHumanize(activity.created_at)}
