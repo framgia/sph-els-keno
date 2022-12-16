@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import api from '../plugins/axios'
 import { getUserToken, getUserType } from "../plugins/localStorageHelper";
 
-const useUsers = () => {
+const useUsers = (page,perPage = 10) => {
     const [users, setUsers] = useState(null);
-
+    const [pageCount, setPageCount] = useState(1);
   useEffect(() => {
         const token = getUserToken()
 
@@ -12,15 +12,16 @@ const useUsers = () => {
             const checkUser = async () => {
                 const type = getUserType()
 
-                const response = await api.get(`${type}/users`)
-                setUsers(response.data.data)
+                const { data } = await api.get(`${type}/users?page=${page}&per_page=${perPage}`)
+                setUsers(data.data)        
+                setPageCount(data.last_page)
             }
 
             checkUser()
         }
-  },[]);
+  },[page]);
 
-  return { users };
+  return { users, pageCount };
 }
 
 export default useUsers;

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../components/Modal";
 import api from '../../plugins/axios'
 import { successNotify } from "../../plugins/toast";
+import { loadingScreenShow } from "../../plugins/loader";
 
 const Lessons = () => {
     const { category_id } = useParams();
@@ -20,9 +21,10 @@ const Lessons = () => {
 
         if(response){
             successNotify(`Deleted lesson successfully`)
-            setDeletion({  id : null,is_deleting : false})
             checkLessons()
         }
+        
+        setDeletion({  id : null, is_deleting : false})
     }
 
     const renderLessons = () => {
@@ -40,7 +42,11 @@ const Lessons = () => {
         })
     }
 
-    if(!lessons) return null;
+    if(!lessons) 
+        return loadingScreenShow()
+    else if(lessons.length === 0) 
+        return <div className="text-center mt-20">No lessons found</div>
+
 
     return (
         <div className="overflow-x-auto relative mt-2">

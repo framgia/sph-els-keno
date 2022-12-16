@@ -1,17 +1,20 @@
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import useCategories from "../../hooks/useCategories";
 import { AiFillPlusCircle,AiFillEye, AiTwotoneDelete, AiFillEdit } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
 import api from '../../plugins/axios'
 import { successNotify } from "../../plugins/toast";
+import { loadingScreenShow } from "../../plugins/loader";
+import Paginator from "../../components/Paginator";
 
 const Categories = () => {
     const [deletion, setDeletion] = useState({
         id : null,
         is_deleting : false
     });
-    const { categories,checkCategories } = useCategories();
+    const [page, setPage] = useState(1);
+    const { categories, pageCount,checkCategories } = useCategories(page);
     const navigate = useNavigate();
 
     const deleteCategory = async () => {
@@ -19,9 +22,10 @@ const Categories = () => {
 
         if(response){
             successNotify(`Deleted category successfully`)
-            setDeletion({  id : null,is_deleting : false})
             checkCategories()
         }
+
+        setDeletion({  id : null, is_deleting : false})
     }
 
     const renderCategories = () => {
@@ -39,7 +43,11 @@ const Categories = () => {
         })
     }
 
-    if(!categories) return null;
+    if(!categories) 
+        return loadingScreenShow()
+    else if(categories.length === 0) 
+        return <div className="text-center mt-20">No categories found</div>
+
 
     return (
         <div className="overflow-x-auto relative mt-2">
@@ -62,6 +70,7 @@ const Categories = () => {
                     {renderCategories()}
                 </tbody>
             </table>
+            <Paginator page={page} pageCount={pageCount} setPage={setPage} />
             <Modal isDeleting={deletion.is_deleting} proceedProcess={() => deleteCategory()} closeModal={() => setDeletion({  id : null,is_deleting : false})}/>
         </div>
     )

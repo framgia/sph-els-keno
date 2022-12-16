@@ -4,17 +4,16 @@ import api from '../plugins/axios'
 const useProfile = (id) => {
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
+    const checkProfile = async () => {
+        const response = await api.get(`user/users/${id}`)
+        setUser(response.data)
+    }
 
-        const checkProfile = async () => {
-            const response = await api.get(`user/users/${id}`)
-            setUser(response.data)
-        }
-        
+    useEffect(() => {
         checkProfile()
     },[id]);
 
-    return { user };
+    return { user, checkProfile };
 }
 
 export default useProfile;

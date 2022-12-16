@@ -43,7 +43,7 @@ const TopNav = () => {
 
                         <div className="hidden md:flex items-center space-x-1">
                             <Link to={`${renderPath('categories')}`} className="py-5 px-3">Categories</Link>
-                            <Link to="/" className="py-5 px-3">Users</Link>
+                            {type === "user" && <Link to="/users" className="py-5 px-3">Users</Link>}
                             <div 
                                 className="py-5 px-3 cursor-pointer hover:bg-slate-100"
                                 onClick={logoutUser}    
