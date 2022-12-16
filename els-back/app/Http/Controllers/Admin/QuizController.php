@@ -39,7 +39,7 @@ class QuizController extends Controller
 
     public function show(Request $request,Quiz $quiz)
     {
-        return $quiz;
+        return $quiz->load('words');
     }
 
     public function delete(Quiz $quiz)

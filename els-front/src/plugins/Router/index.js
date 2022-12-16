@@ -3,7 +3,6 @@ import {
 } from "react-router-dom";
 import Main from "../../templates/Main.js";
 import Auth from "../../templates/Auth";
-
 import ProtectedRoute from "../../components/ProtectedRoute.js";
 
 import Register from "../../pages/user/Register.js";
@@ -19,7 +18,10 @@ import AdminCategories from "../../pages/admin/Categories";
 import CategoryForm from "../../pages/admin/CategoryForm.js";
 import AdminLessons from "../../pages/admin/Lessons";
 import LessonForm from "../../pages/admin/LessonForm.js";
-
+import AdminWords from "../../pages/admin/Words";
+import WordForm from "../../pages/admin/WordForm.js";
+import AdminChoices from "../../pages/admin/Choices";
+import ChoiceForm from "../../pages/admin/ChoiceForm.js";
 const Routes = ({ user }) => {
 
     let routes = useRoutes([
@@ -86,6 +88,30 @@ const Routes = ({ user }) => {
                 {
                     path : "category/:category_id/lessons/edit/:id",
                     element : <LessonForm />
+                },
+                {
+                    path : "lesson/:lesson_id/words/",
+                    element : <AdminWords />
+                },
+                {
+                    path : "lesson/:lesson_id/words/create",
+                    element : <WordForm />
+                },
+                {
+                    path : "lesson/:lesson_id/words/edit/:id",
+                    element : <WordForm />
+                },
+                {
+                    path : "word/:word_id/choices/",
+                    element : <AdminChoices />
+                },
+                {
+                    path : "word/:word_id/choices/create",
+                    element : <ChoiceForm />
+                },
+                {
+                    path : "word/:word_id/choices/edit/:id",
+                    element : <ChoiceForm />
                 },
                 
             ]

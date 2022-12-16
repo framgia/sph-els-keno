@@ -32,7 +32,7 @@ const Lessons = () => {
                     {lesson.name}
                 </th>
                 <td className="py-4 px-6 flex">
-                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" />
+                    <AiFillEye className="h-5 w-5 text-green-300 cursor-pointer" onClick={() => navigate(`/admin/lesson/${lesson.id}/words`)} />
                     <AiTwotoneDelete className="h-5 w-5 text-red-300 cursor-pointer" onClick={() => setDeletion({  id : lesson.id,is_deleting : true}) }/>
                     <AiFillEdit className="h-5 w-5 text-red-300 cursor-pointer" onClick={() => navigate(`/admin/category/${category_id}/lessons/edit/${lesson.id}`)}/>
                 </td>

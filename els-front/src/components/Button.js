@@ -9,7 +9,7 @@ const Button = ({onClick, isDisabled = false, type = 'button', btnClass = '', us
         else if(usage === "quiz_choosing") {
             return "w-full hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 dark:focus:ring-[#1da1f2]/55";
         }
-        else if(usage === "quiz_done") {
+        else if(usage === "quiz_done" || usage === "set_correct") {
             return "bg-green-400 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 text-center inline-flex items-center dark:focus:ring-green-500 dark:hover:bg-green-700"
         }
         else if(usage === "quiz_previous") {
