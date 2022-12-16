@@ -4,19 +4,18 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Quiz;
+use App\Models\Word;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
     public function show(Request $request,Quiz $quiz)
     {
-        return $quiz->load(['words' => function($query) {
-            return $query->with(['choices' => function($choices){
-                return $choices->select('id','word_id','choice');
-            }]);
-        }]);
+        $quiz->already_taken = $request->user()->quizCheckIfTaken($quiz->id);
+        
+        return $quiz->load('words.choices');
     }
-  
+
     public function quizResult(Request $request,$id)
     {
         $checked_result = Quiz::checkResult($request->quiz_answers);

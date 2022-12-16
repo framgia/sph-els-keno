@@ -1,8 +1,11 @@
 import React from "react";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import Button from "./Button";
 
 const Results = ({ results,quizName }) => {
+    const navigate = useNavigate()
+
     const renderQuizResults = () => {
         return results.checked_answers.map((checked_answer,i) => {
             const iconResult = checked_answer.correct === 1 ? <AiOutlineCheckCircle className="text-green-400" /> : <AiOutlineCloseCircle className="text-red-400" />
@@ -28,9 +31,7 @@ const Results = ({ results,quizName }) => {
         </div>
         {renderQuizResults()}
         <div className="mt-10 float-right">
-            <Link to="/categories" type="button" className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2">
-                Go to Categories
-            </Link>
+            <Button onClick={() => navigate(-1)} usage="quiz_previous" btnClass="px-5 mr-2 mb-2 "> Go Back </Button>
         </div>
     </>)
 }

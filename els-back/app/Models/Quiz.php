@@ -41,8 +41,8 @@ class Quiz extends Model
                 "correct_choice" => $correct_choice->choice,
                 "correct" => 0
             ];
-            
-            if($correct_choice->id == $answer['choice_id']){
+
+            if($correct_choice->id === $answer['choice_id']){
                 $score++;
                 $answer_result['correct'] = 1;
             }
@@ -54,6 +54,12 @@ class Quiz extends Model
             'checked_answers' =>$checked_answers,
             'score' =>$score,
         ];
+    }
+
+    
+    public function scopeNotTaken($query,$quizzes_taken_ids) 
+    {
+        return $query->whereNotIn('id',$quizzes_taken_ids);
     }
 
 }
